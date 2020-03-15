@@ -1,17 +1,10 @@
-function sum(nums) {
+const sum = nums => {
  let count = nums[0]
  if (nums.length === 0) {
   return 0
  }
 
  return count + sum(nums.slice(1));
-}
-
-function reduceSum(x) {
-  x.forEach(i => {
-    console.log(i)
-    return i
-  })
 }
 
 //find all possible pairs in array
@@ -57,7 +50,7 @@ const primeFactorize = (num) => {
   }
   let count = 1;
   count++
-  console.log(count)
+  // console.log(count)
   let list = primeFactorize(num - 1);
   if (num % 2 !== 0) {
     list.push(num)
@@ -85,9 +78,7 @@ const findPrimes = (num) => {
 
 }
 
-console.log(primeFactorize(7));
-console.log(getNthFib(7));
-console.log(sum([1, 2, 3, 4, 5]))
+
 
 function reverseString(str) {
   if (str === '') return '';
@@ -95,9 +86,10 @@ function reverseString(str) {
 }
 
 
-console.log(reverseString('hannah'))
+console.log(reverseString('robot'))
 
 function range(start_num, end_num) {
+  let arr  = [];
   if (end_num === start_num + 1) {
     return [];
   }
@@ -143,13 +135,28 @@ const countVowels = (str) => {
 
 
 const printFactors = num => {
+  if (num === 0) {
+    return []
+  }
+  let list = printFactors(num - 1)
+  list.push(num);
+  return list
+}
+
+const printSymbols = num => {
+  let symbol = '*'
+  let str = ''
   if (num === 1) {
-    return [num]
+    return symbol
   }
 
-  let list  = printFactors(num - 1)
-  list.push(num);
-  return list;
+  let count = 0
+  while (count < num) {
+    count++
+    str += symbol
+  }
+  console.log(str)
+  return printSymbols(num - 1)
 }
 
 
@@ -164,10 +171,25 @@ const reverseNum = num => {
   return list
 }
 
+const createObj = nums => {
+  if (nums.length === 0) {
+    return []
+  }
+
+  let list = createObj(nums.slice(1))
+  list.push({'number' : nums[0]})
+  return list
+}
+
 
 console.log(reverseNum(1234532));
+console.log(printSymbols(5));
 console.log(printFactors(5));
 console.log(findMultiples(7, 5));
 console.log(countVowels('djhdsjdsjdjodoedmmdmfkmdawu'));
 console.log(powers(5, 2));
 console.log(range(10, 15))
+console.log(primeFactorize(7));
+console.log(getNthFib(3));
+console.log(sum([1, 2, 3, 4, 5]))
+console.log(createObj([6, 3, 4, 3, 5, 4]))
