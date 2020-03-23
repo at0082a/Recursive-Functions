@@ -22,7 +22,7 @@ const possiblePairs = (nums) => {
   return arr.reduce((t, e) => t.concat(e)).reduce((t, e) => t + e);
 }
 
-console.log(possiblePairs([1, 2, 3, 4]))
+// console.log(possiblePairs([1, 2, 3, 4]))
 
 const getNthFib = (num) => {
   if (num === 2) {
@@ -38,11 +38,8 @@ const powers = (num, power) => {
   if (power === 0) {
     return 1
   }
-
   return num * powers(num, power - 1)
 }
-
-
 
 const primeFactorize = (num) => {
   if (num === 0) {
@@ -52,7 +49,7 @@ const primeFactorize = (num) => {
   count++
   // console.log(count)
   let list = primeFactorize(num - 1);
-  if (num % 2 !== 0) {
+  if (num % 2 !== 0 && findPrimes(num)) {
     list.push(num)
   }
   return list
@@ -69,15 +66,8 @@ const findPrimes = (num) => {
         arr.push(i)
       }
   }
-
-  if (arr.length > 2) {
-    return false
-  }
-
-  return true
-
+  return arr.length <= 2
 }
-
 
 
 function reverseString(str) {
@@ -85,8 +75,6 @@ function reverseString(str) {
   return reverseString(str.substr(1)) + str[0]
 }
 
-
-console.log(reverseString('robot'))
 
 function range(start_num, end_num) {
   let arr  = [];
@@ -100,8 +88,6 @@ function range(start_num, end_num) {
 
 
 
-
-
 const findMultiples = (num, length) => {
   if (length === 1) {
     return [num]
@@ -109,9 +95,7 @@ const findMultiples = (num, length) => {
 
   let list = findMultiples(num, length - 1)
   list.push(num * length)
-
   return list
-
 }
 
 
@@ -125,7 +109,7 @@ const countVowels = (str) => {
   let vowels = ['a', 'e', 'i', 'o', 'u']
   let letter = str[0]
 
-  if (vowels.indexOf(letter) !== -1) {
+  if (vowels.includes(letter)) {
     count++
   }
 
@@ -161,35 +145,100 @@ const printSymbols = num => {
 
 
 const reverseNum = num => {
-  if (!num) {
-    return []
+  if (num.toString().length === 0) {
+    return ''
   }
 
   let numString = num.toString();
-  let list = reverseNum(numString.slice(1))
-  list.push(parseInt(numString[0]))
-  return list
+  return reverseNum(numString.slice(1)) + num[0]
+  // list.push(parseInt(numString[0]))
+  // return list
 }
 
-const createObj = nums => {
-  if (nums.length === 0) {
-    return []
+const createObj = num => {
+  if (num === 0) {
+    return {}
+  }
+  let list = {}
+  list['fdjhfj'] = num
+  // let list = createObj(num-1)
+  return list + createObj(num - 1)
+}
+
+const repeatWord = (word, n) => {
+  if (n === 1) return word
+  return word + repeatWord(word, n - 1)
+}
+
+const factorials = num => {
+  if (num === 1) return 1
+  return num * factorials(num - 1)
+}
+
+
+const isPalindrome = word => {
+  let wordLength = word.length;
+  if(wordLength < 2) return true
+
+  if(word[0] === word[wordLength - 1]) {
+    return isPalindrome(word.slice(1, -1))
   }
 
-  let list = createObj(nums.slice(1))
-  list.push({'number' : nums[0]})
-  return list
+  return false
 }
 
+const firstVowelIndex = (word) => {
+  let index = 0
+  if (word === '') return index
+  let letter = word[0]
+  let vowels = ["a", "e", "i", "o", "u"]
 
+  if (vowels.includes(letter.toLowerCase()) ) {
+    return index
+  }
+  index += 1
+  return index + firstVowelIndex(word.slice(1))
+}
+
+function postNum(fromNumber) {
+    console.log(fromNumber);
+    let nextNumber = fromNumber - 1;
+
+    if (nextNumber > 0) {
+       postNum(nextNumber);
+    }
+}
+
+console.log(postNum(4))
+// const lastVowelIndex = (word) => {
+//   let str = word.split("").reverse().join("")
+//   if (str === '') return index
+//   let index = 0;
+//   let letter = str[0]
+//   let vowels = ["a", "e", "i", "o", "u"]
+
+//   if (vowels.includes(letter.toLowerCase()) ) {
+//     return index
+//   }
+//   console.log(str)
+//   index += 1
+//   return index + lastVowelIndex(str.slice(1))
+// }
+
+// console.log(lastVowelIndex("waspdp"))
+console.log(firstVowelIndex("wsodap"))
+console.log(isPalindrome('hannah'))
+console.log(repeatWord('dog', 5))
+console.log(factorials(4))
 console.log(reverseNum(1234532));
 console.log(printSymbols(5));
 console.log(printFactors(5));
 console.log(findMultiples(7, 5));
+console.log(reverseString('robot'))
 console.log(countVowels('djhdsjdsjdjodoedmmdmfkmdawu'));
 console.log(powers(5, 2));
 console.log(range(10, 15))
 console.log(primeFactorize(7));
 console.log(getNthFib(3));
 console.log(sum([1, 2, 3, 4, 5]))
-console.log(createObj([6, 3, 4, 3, 5, 4]))
+console.log(createObj(6))
