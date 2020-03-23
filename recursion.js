@@ -200,16 +200,18 @@ const firstVowelIndex = (word) => {
   return index + firstVowelIndex(word.slice(1))
 }
 
-function postNum(fromNumber) {
-    console.log(fromNumber);
-    let nextNumber = fromNumber - 1;
+const postNum = number => {
+    console.log(number);
+    let nextNumber = number - 1;
 
     if (nextNumber > 0) {
        postNum(nextNumber);
     }
 }
 
-console.log(postNum(4))
+
+
+console.log(postNum(5))
 // const lastVowelIndex = (word) => {
 //   let str = word.split("").reverse().join("")
 //   if (str === '') return index
